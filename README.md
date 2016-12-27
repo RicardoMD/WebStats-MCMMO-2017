@@ -36,5 +36,12 @@ For Issues you can acess My GIT hub too
 GitHub: https://github.com/RicardoMD/WebStats-MCMMO-2017
 
 
+Changelog V 1.1
+
+27/12/2016
+
+- Reduce File Size
+
+
 
 
