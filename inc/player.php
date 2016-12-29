@@ -1,6 +1,7 @@
 <?php
 include "tables.php";
 include "config.php";
+include "sanitize.php";
 echo "<html lang=\"en\">";
 echo "<head>";
 echo "<title>$page_title</title>";
@@ -13,9 +14,16 @@ echo "<body>";
 echo "<div class='logotipo' align='center'><img style='text-align: center' src='../images/".$img_logo_src."'></div>";
 echo "<br/>";
 
-
+/*function sanitize($in) {
+    return addslashes(htmlspecialchars(strip_tags(trim($in))));
+}*/
 
 header("Content-Type: text/html; charset=UTF-8", true);
+$_GET = Sanitize::filter($_GET);
+
+$_GET['verificar'] = Sanitize::filter($_GET['verificar']);
+
+$_GET['player'] = Sanitize::filter($_GET['player']);
 
 if (isset($_GET['verificar'])=='verificar') {
     $player = $_GET['player'];
@@ -23,7 +31,7 @@ if (isset($_GET['verificar'])=='verificar') {
     if (empty($player)) {
         echo "Digite um Nick na caixa de texto.";
     } else {
-        $query = "SELECT nick FROM ast_auth WHERE nick='$player'";
+        $query = "SELECT user FROM mcmmo_users WHERE user='$player'";
         $result = mysqli_query($link, $query);
         $busca = mysqli_num_rows($result);
 
